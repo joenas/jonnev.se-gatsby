@@ -1,10 +1,12 @@
 {
   "development": {
-    "apiUrl": "https://gatsby.ghost.io",
-    "contentApiKey": "9cc5c67c358edfdd81455149d0"
+    "apiUrl": "https://jonnev.se",
+    "contentApiKey": "92d39503452b9456390e4ceb8b",
+    "version": "v2"
   },
   "production": {
-    "apiUrl": "https://gatsby.ghost.io",
-    "contentApiKey": "9cc5c67c358edfdd81455149d0"
+    "apiUrl": "https://jonnev.se",
+    "contentApiKey": "92d39503452b9456390e4ceb8b",
+    "version": "v2"
   }
 }
