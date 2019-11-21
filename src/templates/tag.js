@@ -19,9 +19,7 @@ const Tag = ({ data, location, pageContext }) => {
         <>
             <MetaData data={data} location={location} type="series" />
             <Layout>
-                <h3 className="posts-tagged">
-                    <span className="fa fa-fw fa-tag"></span> {tag.name}
-                </h3>
+                <h3 className="posts-tagged">{tag.name}</h3>
                 <section className="articles">
                     {posts.map(({ node }) => (
                         // The tag below includes the markup for each post - components/common/PostCard.js

@@ -81,6 +81,7 @@ const generateRSSFeed = function generateRSSFeed(siteConfig) {
                 ...feed
             };
         },
+        title: "Jon Neverland - Software developer",
         query: `
         {
             allGhostPost(

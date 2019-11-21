@@ -15,7 +15,6 @@ const Pagination = ({ pageContext }) => {
             <div>
                 {previousPagePath && (
                     <Link to={previousPagePath} rel="prev">
-                        <span className="fa fa-chevron-circle-left"></span>{" "}
                         Newer
                     </Link>
                 )}
@@ -29,7 +28,6 @@ const Pagination = ({ pageContext }) => {
                 {nextPagePath && (
                     <Link to={nextPagePath} rel="next">
                         Older{" "}
-                        <span className="fa fa-chevron-circle-right"></span>
                     </Link>
                 )}
             </div>

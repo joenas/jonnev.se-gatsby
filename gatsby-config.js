@@ -183,9 +183,16 @@ module.exports = {
                 addUncaughtPages: true
             }
         },
+        {
+            resolve: `gatsby-plugin-disqus`,
+            options: {
+                shortname: `jonnev`
+            }
+        },
         `gatsby-plugin-catch-links`,
         `gatsby-plugin-react-helmet`,
         `gatsby-plugin-force-trailing-slashes`,
-        `gatsby-plugin-offline`
+        `gatsby-plugin-remove-serviceworker`
+        // `gatsby-plugin-offline`
     ]
 };

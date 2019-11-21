@@ -7,6 +7,7 @@ import { Navigation } from ".";
 import config from "../../utils/siteConfig";
 
 // Styles
+import "normalize.css";
 import "../../styles/app.css";
 
 import headerImage from "../../images/og-image-sm.png";
@@ -60,8 +61,11 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                             rel="noopener noreferrer"
                             title="GitHub"
                         >
-                            <span className="fa fa-2x fa-fw fa-github"></span>{" "}
-                            <span className="hidden">GitHub</span>
+                            <img
+                                className="site-nav-icon"
+                                src="/images/icons/github.svg"
+                                alt="Github"
+                            />
                         </a>
                         <a
                             href="https://twitter.com/jonnever"
@@ -69,8 +73,11 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                             rel="noopener noreferrer"
                             title="Twitter"
                         >
-                            <span className="fa fa-2x fa-fw fa-twitter"></span>{" "}
-                            <span className="hidden">Twitter</span>
+                            <img
+                                className="site-nav-icon"
+                                src="/images/icons/twitter.svg"
+                                alt="Twitter"
+                            />
                         </a>
                         <a
                             href="https://www.linkedin.com/in/jonneverland"
@@ -78,8 +85,11 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                             rel="noopener noreferrer"
                             title="LinkedIn"
                         >
-                            <span className="fa fa-2x fa-fw fa-linkedin"></span>{" "}
-                            <span className="hidden">GitHub</span>
+                            <img
+                                className="site-nav-icon"
+                                src="/images/icons/linkedin.svg"
+                                alt="LinkedIn"
+                            />
                         </a>
                         <a
                             href={`${config.siteUrl}/rss/`}
@@ -87,8 +97,11 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                             rel="noopener noreferrer"
                             title="RSS"
                         >
-                            <span className="fa fa-2x fa-fw fa-rss"></span>
-                            <span className="hidden">RSS</span>
+                            <img
+                                className="site-nav-icon"
+                                src="/images/icons/rss-solid.svg"
+                                alt="RSS"
+                            />
                         </a>
                     </section>
 
@@ -96,6 +109,11 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                         &copy; 2019 {site.title}.
                     </section>
                     <section className="theme">
+                        Icons -{" "}
+                        <a href="https://fontawesome.com/license">
+                            FontAwesome
+                        </a>
+                        <br />
                         Logo by{" "}
                         <a href="http://josef.sh" title="josef.sh">
                             Josef

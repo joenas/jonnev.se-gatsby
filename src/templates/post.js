@@ -2,8 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { graphql } from "gatsby";
 import Helmet from "react-helmet";
-
+import { Disqus } from "gatsby-plugin-disqus";
 import { Tags } from "@tryghost/helpers-gatsby";
+
+import config from "../utils/siteConfig";
 
 import { Layout } from "../components/common";
 import { MetaData } from "../components/common/meta";
@@ -16,6 +18,11 @@ import { MetaData } from "../components/common/meta";
  */
 const Post = ({ data, location }) => {
     const post = data.ghostPost;
+    let disqusConfig = {
+        url: `${config.siteUrl + location.pathname}`,
+        identifier: `ghost-${post.comment_id}`,
+        title: post.title
+    };
 
     return (
         <>
@@ -41,7 +48,6 @@ const Post = ({ data, location }) => {
                     />
                     {post.tags && (
                         <div className="post-meta tags">
-                            <i className="fa fa-fw fa-tags"></i>{" "}
                             <Tags
                                 post={post}
                                 visibility="public"
@@ -52,7 +58,8 @@ const Post = ({ data, location }) => {
                         </div>
                     )}
                 </article>
-                {/* TODO: disqus */}
+                <hr />
+                <Disqus config={disqusConfig} />
             </Layout>
         </>
     );
@@ -66,7 +73,8 @@ Post.propTypes = {
             html: PropTypes.string.isRequired,
             feature_image: PropTypes.string,
             updated_at_pretty: PropTypes.string.isRequired,
-            tags: PropTypes.array
+            tags: PropTypes.array,
+            comment_id: PropTypes.string.isRequired
         }).isRequired
     }).isRequired,
     location: PropTypes.object.isRequired
