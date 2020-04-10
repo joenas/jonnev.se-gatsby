@@ -63,6 +63,7 @@
     "gatsby-source-filesystem": "2.1.33",
     "gatsby-source-ghost": "4.0.1",
     "gatsby-transformer-sharp": "2.3.0",
+    "kind-of": "^6.0.3",
     "lodash": "4.17.15",
     "minimist": "^1.2.3",
     "normalize.css": "^8.0.1",
