@@ -1,0 +1,30 @@
+name: Node.js CI
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+env:
+  CI: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ "15.x"]
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Install dependencies
+        run: |
+          yarn install --frozen-lockfile
+      - name: ESLint
+        run: |
+          yarn run eslint
+      - name: Build
+        run: |
+          yarn run build
