@@ -1,11 +1,11 @@
 {
   "development": {
-    "apiUrl": "https://jonnev.se",
+    "apiUrl": "https://ghost.jonnev.dev",
     "contentApiKey": "92d39503452b9456390e4ceb8b",
     "version": "v2"
   },
   "production": {
-    "apiUrl": "https://jonnev.se",
+    "apiUrl": "https://ghost.jonnev.dev",
     "contentApiKey": "92d39503452b9456390e4ceb8b",
     "version": "v2"
   }
