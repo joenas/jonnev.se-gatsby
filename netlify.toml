@@ -4,3 +4,8 @@
 
 [template]
   incoming-hooks = ["Ghost"]
+
+[[redirects]]
+from = "/content/images/*"
+status = 200
+to = "https://ghost.jonnev.dev/content/images/:splat"
