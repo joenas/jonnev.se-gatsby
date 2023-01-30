@@ -10,6 +10,8 @@ var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runt
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
+var _excluded = ["icon"];
+
 var fs = require("fs");
 
 var path = require("path");
@@ -32,28 +34,24 @@ function generateIcons(icons, srcIcon) {
   });
 }
 
-exports.onPostBuild =
-/*#__PURE__*/
-function () {
-  var _ref2 = (0, _asyncToGenerator2["default"])(
-  /*#__PURE__*/
-  _regenerator["default"].mark(function _callee(_ref, pluginOptions) {
-    var graphql, icon, manifest, _ref3, data, siteTitle, iconPath;
+exports.onPostBuild = /*#__PURE__*/function () {
+  var _ref2 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee(_ref, pluginOptions) {
+    var graphql, icon, manifest, _yield$graphql, data, siteTitle, iconPath;
 
-    return _regenerator["default"].wrap(function _callee$(_context) {
+    return _regenerator.default.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             graphql = _ref.graphql;
-            icon = pluginOptions.icon, manifest = (0, _objectWithoutPropertiesLoose2["default"])(pluginOptions, ["icon"]);
+            icon = pluginOptions.icon, manifest = (0, _objectWithoutPropertiesLoose2.default)(pluginOptions, _excluded);
             _context.next = 4;
             return graphql(pluginOptions.query);
 
           case 4:
-            _ref3 = _context.sent;
-            data = _ref3.data;
+            _yield$graphql = _context.sent;
+            data = _yield$graphql.data;
             siteTitle = data.allGhostSettings.edges[0].node.title || "No Title";
-            manifest = (0, _extends2["default"])({}, manifest, {
+            manifest = (0, _extends2.default)({}, manifest, {
               name: siteTitle
             }); // Delete options we won't pass to the manifest.webmanifest.
 
@@ -67,7 +65,7 @@ function () {
             } // Determine destination path for icons.
 
 
-            iconPath = path.join("public", path.dirname(manifest.icons[0].src)); // create destination directory if it doesn't exist
+            iconPath = path.join("public", path.dirname(manifest.icons[0].src)); //create destination directory if it doesn't exist
 
             if (!fs.existsSync(iconPath)) {
               fs.mkdirSync(iconPath);
@@ -78,11 +76,11 @@ function () {
             if (icon !== undefined) {
               // Check if the icon exists
               if (!doesIconExist(icon)) {
-                Promise.reject(new Error("icon (" + icon + ") does not exist as defined in gatsby-config.js. Make sure the file exists relative to the root of the site."));
+                Promise.reject("icon (" + icon + ") does not exist as defined in gatsby-config.js. Make sure the file exists relative to the root of the site.");
               }
 
               generateIcons(manifest.icons, icon).then(function () {
-                // images have been generated
+                //images have been generated
                 console.log("done generating icons for manifest");
                 Promise.resolve();
               });

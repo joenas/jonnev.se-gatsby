@@ -1,3 +1,6 @@
+/* eslint-disable semi */
+/* eslint-disable no-unsafe-finally */
+/* eslint-disable no-restricted-syntax */
 const path = require(`path`);
 
 const config = require(`./src/utils/siteConfig`);
@@ -11,8 +14,8 @@ try {
     ghostConfig = {
         production: {
             apiUrl: process.env.GHOST_API_URL,
-            contentApiKey: process.env.GHOST_CONTENT_API_KEY
-        }
+            contentApiKey: process.env.GHOST_CONTENT_API_KEY,
+        },
     };
 } finally {
     const { apiUrl, contentApiKey } =
@@ -21,11 +24,20 @@ try {
             : ghostConfig.production;
 
     if (!apiUrl || !contentApiKey || contentApiKey.match(/<key>/)) {
-        // eslint-disable-next-line no-unsafe-finally
         throw new Error(
             `GHOST_API_URL and GHOST_CONTENT_API_KEY are required to build. Check the README.`
-        );
+        ); // eslint-disable-line
     }
+}
+
+if (
+    process.env.NODE_ENV === `production` &&
+    config.siteUrl === `http://localhost:8000` &&
+    !process.env.SITEURL
+) {
+    throw new Error(
+        `siteUrl can't be localhost and needs to be configured in siteConfig. Check the README.`
+    ); // eslint-disable-line
 }
 
 /**
@@ -37,9 +49,16 @@ try {
  */
 module.exports = {
     siteMetadata: {
-        siteUrl: config.siteUrl
+        siteUrl: process.env.SITEURL || config.siteUrl,
     },
+    trailingSlash: 'always',
     plugins: [
+        {
+            resolve: `gatsby-plugin-disqus`,
+            options: {
+              shortname: `jonnev`
+            }
+          },
         /**
          *  Content Plugins
          */
@@ -47,8 +66,8 @@ module.exports = {
             resolve: `gatsby-source-filesystem`,
             options: {
                 path: path.join(__dirname, `src`, `pages`),
-                name: `pages`
-            }
+                name: `pages`,
+            },
         },
         // Setup for optimised images.
         // See https://www.gatsbyjs.org/packages/gatsby-image/
@@ -56,9 +75,10 @@ module.exports = {
             resolve: `gatsby-source-filesystem`,
             options: {
                 path: path.join(__dirname, `src`, `images`),
-                name: `images`
-            }
+                name: `images`,
+            },
         },
+        `gatsby-plugin-image`,
         `gatsby-plugin-sharp`,
         `gatsby-transformer-sharp`,
         {
@@ -66,7 +86,7 @@ module.exports = {
             options:
                 process.env.NODE_ENV === `development`
                     ? ghostConfig.development
-                    : ghostConfig.production
+                    : ghostConfig.production,
         },
         /**
          *  Utility Plugins
@@ -92,8 +112,8 @@ module.exports = {
                         }
                     }
                 }
-              `
-            }
+              `,
+            },
         },
         {
             resolve: `gatsby-plugin-feed`,
@@ -110,8 +130,8 @@ module.exports = {
                     }
                 }
               `,
-                feeds: [generateRSSFeed(config)]
-            }
+                feeds: [generateRSSFeed(config)],
+            },
         },
         {
             resolve: `gatsby-plugin-advanced-sitemap`,
@@ -161,38 +181,30 @@ module.exports = {
                 }`,
                 mapping: {
                     allGhostPost: {
-                        sitemap: `posts`
+                        sitemap: `posts`,
                     },
                     allGhostTag: {
-                        sitemap: `tags`
+                        sitemap: `tags`,
                     },
                     allGhostAuthor: {
-                        sitemap: `authors`
+                        sitemap: `authors`,
                     },
                     allGhostPage: {
-                        sitemap: `pages`
-                    }
+                        sitemap: `pages`,
+                    },
                 },
                 exclude: [
                     `/dev-404-page`,
                     `/404`,
                     `/404.html`,
-                    `/offline-plugin-app-shell-fallback`
+                    `/offline-plugin-app-shell-fallback`,
                 ],
                 createLinkInHead: true,
-                addUncaughtPages: true
-            }
-        },
-        {
-            resolve: `gatsby-plugin-disqus`,
-            options: {
-                shortname: `jonnev`
-            }
+                addUncaughtPages: true,
+            },
         },
         `gatsby-plugin-catch-links`,
         `gatsby-plugin-react-helmet`,
-        `gatsby-plugin-force-trailing-slashes`,
-        `gatsby-plugin-remove-serviceworker`
-        // `gatsby-plugin-offline`
-    ]
+        `gatsby-plugin-offline`,
+    ],
 };
