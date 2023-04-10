@@ -11,9 +11,6 @@ main {
     margin: auto;
 }
 
-header {
-    margin-bottom: 1rem;
-}
 
 h1,
 h2 {
@@ -211,11 +208,10 @@ blockquote p {
     text-align: center;
 }
 
-.preview:not(:last-child):after {
-    content: "—";
-    color: #d3d3d3;
-}
 
+.preview {
+    margin-bottom: 2em;
+}
 .preview:last-child {
     margin-bottom: 2.5em;
 }
@@ -236,4 +232,8 @@ blockquote p {
     height: 30px;
     width: 30px;
     padding: 0 7.5px;
+}
+
+section.post-excerpt p {
+    margin-top: 0px;
 }
